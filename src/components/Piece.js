@@ -26,26 +26,26 @@ class Piece extends Component {
     // TODO: pass in props
     const {} = this.props;
     let hovered;
-    if (this.state.hovered || disable) {
-      hovered = 'rgba(195, 195, 195, 0.6)';
-    }
+    // if (this.state.hovered || disable) {
+    //   hovered = 'rgba(195, 195, 195, 0.6)';
+    // }
 
     return (
       <div
         className="piece flex-center"
-        onClick={}
-        style={{ background: hovered}}
+        onClick={() => console.log('hi')}
+        style={{ background: hovered }}
         onMouseOver={this.hoverActive}
         onMouseLeave={this.hoverInactive}
-       >
-       {}
-       </div>
+      >
+        {true}
+      </div>
     );
   }
 }
 
 Piece.propTypes = {
 
-}
+};
 
 export default Piece;

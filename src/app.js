@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 
 import ReactDOM, { render } from 'react-dom';
 
-import { Welcome } from './containers';
+import containers from './containers';
+import registerServiceWorker from './registerServiceWorker';
 
-const App = () => {
-  <div className='App'>
-    <Welcome/>
+import './styles.css';
+
+const { Welcome } = containers;
+
+const App = () => (
+  <div className="Main">
+    {'inside app.js'}
+    <Welcome />
   </div>
-}
+);
 
-render (<App/>, document.getElementById('root'));
-// import { connect } from 'react-redux';
-// import containers
-// import css for app.js
+render(<App />, document.getElementById('root'));
+
+registerServiceWorker();

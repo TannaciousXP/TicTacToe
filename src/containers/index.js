@@ -4,5 +4,4 @@ import GameInProgress from './GameInProgress';
 export default {
   Welcome,
   GameInProgress,
-}
-;
+};
