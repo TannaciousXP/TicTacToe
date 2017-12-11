@@ -8,8 +8,8 @@ const Board = ({ pieces, width }) => (
 );
 
 Board.propTypes = {
-  width: PropTypes.number.isRequired,
-  pieces: PropTypes.array.isRequired,
+  width: PropTypes.string.isRequired,
+  pieces: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Board;

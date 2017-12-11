@@ -10,13 +10,13 @@ class Piece extends Component {
   }
 
 
-  hoverActive() {
-    this.set({
+  hoverActive = () => {
+    this.setState({
       hovered: true,
     });
   }
 
-  hoverInactive() {
+  hoverInactive = () => {
     this.setState({
       hovered: false,
     });
@@ -24,28 +24,28 @@ class Piece extends Component {
 
   render() {
     // TODO: pass in props
-    const {} = this.props;
+    const { mark } = this.props;
     let hovered;
-    // if (this.state.hovered || disable) {
-    //   hovered = 'rgba(195, 195, 195, 0.6)';
-    // }
+    if (this.state.hovered) {
+      hovered = 'rgba(195, 195, 195, 0.6)';
+    }
 
     return (
       <div
-        className="piece flex-center"
+        className="slot board wrapper"
         onClick={() => console.log('hi')}
         style={{ background: hovered }}
         onMouseOver={this.hoverActive}
         onMouseLeave={this.hoverInactive}
       >
-        {true}
+        {mark + 'hi'}
       </div>
     );
   }
 }
 
 Piece.propTypes = {
-
+  mark: PropTypes.string.isRequired,
 };
 
 export default Piece;

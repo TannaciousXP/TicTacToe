@@ -1,6 +1,12 @@
 import { NEW_BOARD, BOARD_SIZE } from '../actions';
 
-export default function (state = Array(9), action) {
+const intialBoard = [];
+
+for (let i = 0; i < 9; i++) {
+  intialBoard.push('');
+}
+
+export default function (state = intialBoard, action) {
   switch (action.type) {
     case NEW_BOARD:
       return action.payload;

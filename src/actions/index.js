@@ -38,7 +38,11 @@ export const gameOver = function gameOver(bool = false) {
 
 // Initial Board
 export const firstBoard = function firstBoard(boardSize) {
-  const intialBoard = Array(boardSize === '' ? 9 : JSON.parse(boardSize) * JSON.parse(boardSize));
+  const intialBoard = [];
+
+  for (let i = 0; i < (boardSize === '' ? 9 : JSON.parse(boardSize) * JSON.parse(boardSize)); i += 1) {
+    intialBoard.push('');
+  }
 
   return {
     type: BOARD_SIZE,
@@ -47,10 +51,10 @@ export const firstBoard = function firstBoard(boardSize) {
 };
 
 // New Board
-export const newBoard = function newBoard(newBoard) {
+export const newBoard = function newBoard(updatedBoard) {
   return {
     type: NEW_BOARD,
-    payload: newBoard,
+    payload: updatedBoard,
   };
 };
 
