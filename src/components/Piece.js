@@ -24,7 +24,7 @@ class Piece extends Component {
 
   render() {
     // TODO: pass in props
-    const { move } = this.props;
+    const { move, handleClick, value } = this.props;
     let hovered;
     if (this.state.hovered) {
       hovered = 'rgba(195, 195, 195, 0.6)';
@@ -32,8 +32,9 @@ class Piece extends Component {
 
     return (
       <div
+        value={value}
         className="slot board wrapper"
-        onClick={() => console.log('hi')}
+        onClick={handleClick}
         style={{ background: hovered }}
         onMouseOver={this.hoverActive}
         onMouseLeave={this.hoverInactive}
@@ -46,6 +47,8 @@ class Piece extends Component {
 
 Piece.propTypes = {
   move: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default Piece;

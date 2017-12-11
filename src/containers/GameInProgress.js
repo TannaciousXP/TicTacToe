@@ -12,15 +12,24 @@ class GameInProgress extends Component {
     this.state = {
       hold: '',
     };
+    this.handleClickSlot = this.handleClickSlot.bind(this);
   }
 
+  handleClickSlot(e) {
+    console.log(e.target);
+  }
 
   render() {
     const {
       player1Name, player2Name, currTurn, board,
     } = this.props;
     // { console.log(board) ;}
-    const boardPieces = board.map((piece, i) => <Piece key={i} move={piece} />);
+    const boardPieces = board.map((piece, i) => (<Piece
+      key={i}
+      value={i}
+      move={piece}
+      handleClick={this.handleClickSlot}
+    />));
 
     return (
       <div className="board wrapper">
