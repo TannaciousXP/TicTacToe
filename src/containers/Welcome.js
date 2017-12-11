@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, Input, Select, Form } from 'semantic-ui-react';
 
 import components from '../components';
-import { numPlayers } from '../actions';
+import { numPlayers, namePlayer1 } from '../actions';
 
 const { Status } = components;
 
@@ -22,6 +22,7 @@ class Welcome extends Component {
       player1: '',
       player2: '',
       board: '',
+      firstMove: '',
     }
   }
 
@@ -32,6 +33,8 @@ class Welcome extends Component {
 
   handleSubmit = () => {
     console.log(this.state);
+    const { player1, player2, board, firstMove } = this.state;
+    this.props.namePlayer1(player1);
   };
 
   onChangePlayerName = (e, {name, value}) => {
@@ -44,7 +47,13 @@ class Welcome extends Component {
     this.setState({
       board: value,
     });
-  }
+  };
+  
+  chooseFirstMove = (e, { value }) => {
+    this.setState({
+      firstMove: value,
+    });
+  };
 
   PlayerNames = () => {
     const { player1, player2 } = this.state;
@@ -56,7 +65,7 @@ class Welcome extends Component {
           control={Input} 
           name='player1' 
           value={player1} 
-          label="Player1 name" 
+          label="Player 1 name" 
           placeholder="Type in Player1 name"
           onChange={this.onChangePlayerName} />
           {
@@ -65,7 +74,7 @@ class Welcome extends Component {
               control={Input} 
               name='player2' 
               value={player2} 
-              label="Player2 name" 
+              label="Player 2 name" 
               placeholder="Type in Player2 name" 
               onChange={this.onChangePlayerName} /> :
               null
@@ -76,6 +85,21 @@ class Welcome extends Component {
           options={options} 
           placeholder="Pick a size board" 
           onChange={this.onChangeBoard}/>
+        </Form.Group>
+        <Status text="Player 1 choose between X or O"/>
+        <Form.Group widths="equal">
+          <Form.Button 
+          color='instagram' 
+          value="X" 
+          content="X" 
+          onClick={this.chooseFirstMove}
+          disabled={this.state.firstMove !== ''} />
+          <Form.Button 
+          color='instagram' 
+          value="O" 
+          content="O" 
+          onClick={this.chooseFirstMove} 
+          disabled={this.state.firstMove !== ''} />
         </Form.Group>
         <Form.Button color="youtube" content="Begin Game!" />
       </Form>
@@ -131,4 +155,5 @@ Welcome.propTypes = {
 
 export default connect(mapStateToProps, {
   numPlayers,
+  namePlayer1,
 })(Welcome);
