@@ -1,17 +1,16 @@
-import { combineReducers } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 
 import numPlayers from './reducer_numPlayers';
 
-// import reducers
 
 const rootReducer = combineReducers({
-  numPlayers,
-  player1: '',
-  player2: '',
-  piecesOnBoard: [],
-  turnCount: 0,
-  currentTurn: '',
-
+  numberOfPlayers: numPlayers,
 });
 
-export default rootReducer;
+const store = createStore(
+  rootReducer,
+  applyMiddleware(logger),
+);
+
+export default store;

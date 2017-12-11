@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import ReactDOM, { render } from 'react-dom';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+// import promise from 'react-promise';
 
 import containers from './containers';
 import registerServiceWorker from './registerServiceWorker';
-
+import store from './reducers';
 import './styles.css';
 
 const { Welcome } = containers;
 
+
 const App = () => (
-  <div className="Main">
-    <Welcome />
-  </div>
+  <Provider store={store}>
+    <div className="Main">
+      <Welcome />
+    </div>
+  </Provider>
 );
 
 render(<App />, document.getElementById('root'));

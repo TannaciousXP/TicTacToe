@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
 
 import components from '../components';
+import { numPlayers } from '../actions';
 
 const { Status } = components;
 
