@@ -5,10 +5,10 @@ export const NUM_PLAYERS = 'num_players';
 //   payload: num,
 // });
 
-export const numPlayers = function (num) {
+export const numPlayers = function numPlayers(num) {
   return {
     type: NUM_PLAYERS,
-    payload: num,
+    payload: JSON.parse(num),
   };
 };
 

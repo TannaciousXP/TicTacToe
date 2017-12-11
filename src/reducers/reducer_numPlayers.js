@@ -4,7 +4,7 @@ import { NUM_PLAYERS } from '../actions';
 // const { NUM_PLAYERS } = actions;
 
 
-export default function (state = '0', action) {
+export default function (state = -1, action) {
   switch (action.type) {
     case NUM_PLAYERS:
       return action.payload;
