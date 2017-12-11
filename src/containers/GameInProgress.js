@@ -38,10 +38,28 @@ class GameInProgress extends Component {
     return message[currentTurn];
   }
 
+  availabeSlots(slots) {
+    return slots.reduce((acc, slot, i) => {
+      if (slot === '') {
+        return [...acc, i];
+      }
+      return acc;
+    }, []);
+  }
+
   handleClickSlot(e) {
-    // const {} = this.props;
+    const {
+      turnCount,
+      gameOver,
+      gameInProgress,
+      newBoard,
+      nextTurn,
+      board,
+      currTurn,
+      turnCountNum,
+      isGameInProgress,
+    } = this.props;
     // console.log(e.target);
-    console.log(this.state);
   }
 
   render() {
@@ -65,7 +83,7 @@ class GameInProgress extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   player1Name: state.player1Name,
   player2Name: state.player2Name,
   currTurn: state.currTurn,
