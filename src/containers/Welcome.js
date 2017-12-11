@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Button } from 'semantic-ui-react';
@@ -8,25 +9,44 @@ import { numPlayers } from '../actions';
 
 const { Status } = components;
 
-const Welcome = () => {
-  const handlePlayGame = (e) => {
-
-  };
-
+const Welcome = ({ numPlayers, numberOfPlayers }) => {
   const chooseNumberOfPlayers = (e) => {
-    console.log(e.target.value);
+    numPlayers(e.target.value);
   };
 
   return (
     <div className="welcome">
       <Status text="Welcome to Tic-Tac-Toe" />
       <Button.Group size="large">
-        <Button color="youtube" value={1} onClick={chooseNumberOfPlayers}>1 Player</Button>
+        <Button
+          color="youtube"
+          value={1}
+          onClick={chooseNumberOfPlayers}
+        >1 Player
+        </Button>
         <Button.Or />
-        <Button color="youtube" value={2} onClick={chooseNumberOfPlayers}>2 Players</Button>
+        <Button
+          color="youtube"
+          disabled={numberOfPlayers === '1'}
+          value={2}
+          onClick={chooseNumberOfPlayers}
+        >2 Players
+        </Button>
       </Button.Group>
     </div>
   );
 };
 
-export default Welcome;
+const mapStateToProps = (state, ownProps) => ({
+  numberOfPlayers: state.numberOfPlayers,
+});
+
+Welcome.propTypes = {
+  numberOfPlayers: PropTypes.string.isRequired,
+  numPlayers: PropTypes.func.isRequired,
+};
+
+
+export default connect(mapStateToProps, {
+  numPlayers,
+})(Welcome);
