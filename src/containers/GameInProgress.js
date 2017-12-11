@@ -5,7 +5,6 @@ import components from '../components';
 import {
   turnCount,
   gameOver,
-  gameInProgress,
   newBoard,
   nextTurn,
 } from '../actions';
@@ -38,8 +37,8 @@ class GameInProgress extends Component {
     return message[currentTurn];
   }
 
-  availabeSlots(slots) {
-    return slots.reduce((acc, slot, i) => {
+  availabeSlots(board) {
+    return board.reduce((acc, slot, i) => {
       if (slot === '') {
         return [...acc, i];
       }
@@ -51,7 +50,6 @@ class GameInProgress extends Component {
     const {
       turnCount,
       gameOver,
-      gameInProgress,
       newBoard,
       nextTurn,
       board,
@@ -60,6 +58,16 @@ class GameInProgress extends Component {
       isGameInProgress,
     } = this.props;
     // console.log(e.target);
+
+    let nextSteps;
+
+    const availableSlotsArr = this.availabeSlots(board);
+    const i = e.target.value;
+    const canInsert = availableSlotsArr.indexOf(i) !== -1;
+
+    if (canInsert) {
+      // TODO: Insert func
+    }
   }
 
   render() {
@@ -101,7 +109,6 @@ GameInProgress.propTypes = {
   isGameInProgress: PropTypes.bool.isRequired,
   turnCount: PropTypes.func.isRequired,
   gameOver: PropTypes.func.isRequired,
-  gameInProgress: PropTypes.func.isRequired,
   newBoard: PropTypes.func.isRequired,
   nextTurn: PropTypes.func.isRequired,
 };
@@ -109,7 +116,6 @@ GameInProgress.propTypes = {
 export default connect(mapStateToProps, {
   turnCount,
   gameOver,
-  gameInProgress,
   newBoard,
   nextTurn,
 })(GameInProgress);

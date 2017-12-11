@@ -13,6 +13,85 @@ export const TURN_COUNT = 'TURN_COUNT';
 export const WINNER = 'WINNER';
 
 
+let winner;
+export const checkForWinner = function checkForWinner(board) {
+  const length = Math.sqrt(board.length);
+
+  for (let row = 0; row < length; row += 1) {
+    // reset winner at each row
+    winner = null;
+    for (let col = 0; col < length; col += 1) {
+      const player = board[(row * length) + col];
+      if (!player) {
+        winner = null;
+        break;
+      } else if (!winner) {
+        winner = player;
+      } else if (player != winner) {
+        winner = null;
+        break;
+      }
+      if (col === 2 && winner !== null) {
+        // if there is check to see if the three are equal
+        return winner;
+      }
+    }
+  }
+
+  // check columns
+  for (let row = 0; row < length; row += 1) {
+    // reset winner at each column
+    winner = null;
+    // push into the players turn
+    for (let col = 0; col < length; col += 1) {
+      const player = board[(col * length) + row];
+      if (!player) {
+        winner = null;
+        break;
+      } else if (!winner) {
+        winner = player;
+      } else if (player != winner) {
+        winner = null;
+        break;
+      }
+      if (col === 2 && winner !== null) {
+        return winner;
+      }
+    }
+  }
+
+  // check diagonal 1 - 0 4 8
+  for (let row = 0; row < length; row += 1) {
+    const player = board[row * (length + 1)];
+    if (!player) {
+      winner = null;
+      break;
+    } else if (!winner) {
+      winner = player;
+    } else if (player !== winner) {
+      winner = null;
+      break;
+    }
+  }
+  if (winner) return winner;
+
+  // check diagonal 2 - 2 4 6
+  for (let row = 0; row < length; row += 1) {
+    const player = board[(row * (length - 1)) + (length - 1)];
+    if (!player) {
+      winner = null;
+      break;
+    } else if (!winner) {
+      winner = player;
+    } else if (player !== winner) {
+      winner = null;
+      break;
+    }
+  }
+  return winner !== null ? winner : null;
+};
+
+
 // Get Turn Count
 export const turnCount = function turnCount(count) {
   return {
@@ -23,6 +102,7 @@ export const turnCount = function turnCount(count) {
 
 // Is Game in Progress => true
 export const gameInProgress = function gameInProgress(bool = true) {
+  winner = null;
   return {
     type: GAME_IN_PROGRESS,
     payload: bool,

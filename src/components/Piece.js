@@ -34,7 +34,7 @@ class Piece extends Component {
       <div
         value={value}
         className="slot board wrapper"
-        onClick={handleClick}
+        onClick={move === '' ? handleClick : null}
         style={{ background: hovered }}
         onMouseOver={this.hoverActive}
         onMouseLeave={this.hoverInactive}
