@@ -3,13 +3,38 @@ export const PLAYER1_NAME = 'PLAYER1';
 export const PLAYER2_NAME = 'PLAYER2';
 export const FIRST_TURN = 'FIRST_TURN';
 export const NEXT_TURN = 'NEXT_TURN';
+export const BOARD_SIZE = 'BOARD_SIZE';
+export const NEW_BOARD = 'NEW_BOARD';
 
 // Have no functions
 export const WINNER = 'WINNER';
-export const BOARD_SIZE = 'BOARD_SIZE';
-export const NEW_BOARD = 'NEW_BOARD';
 export const GAME_IN_PROGRESS = 'GAME_IN_PROGRESS';
+export const GAME_OVER = 'GAME_OVER';
 export const TURN_COUNT = 'TURN_COUNT';
+
+// Get Turn Count
+export const turnCount = function turnCount(count) {
+  return {
+    type: TURN_COUNT,
+    payload: count,
+  };
+};
+
+// Is Game in Progress => true
+export const gameInProgress = function gameInProgress() {
+  return {
+    type: GAME_IN_PROGRESS,
+    payload: true,
+  };
+};
+
+// Is Game in Progress => false
+export const gameOver = function gameOver() {
+  return {
+    type: GAME_OVER,
+    payload: false,
+  };
+};
 
 // Initial Board
 export const firstBoard = function firstBoard(boardSize) {
