@@ -5,12 +5,12 @@ export const FIRST_TURN = 'FIRST_TURN';
 export const NEXT_TURN = 'NEXT_TURN';
 export const BOARD_SIZE = 'BOARD_SIZE';
 export const NEW_BOARD = 'NEW_BOARD';
-
-// Have no functions
-export const WINNER = 'WINNER';
 export const GAME_IN_PROGRESS = 'GAME_IN_PROGRESS';
 export const GAME_OVER = 'GAME_OVER';
 export const TURN_COUNT = 'TURN_COUNT';
+
+// Have no functions
+export const WINNER = 'WINNER';
 
 // Get Turn Count
 export const turnCount = function turnCount(count) {
@@ -21,18 +21,18 @@ export const turnCount = function turnCount(count) {
 };
 
 // Is Game in Progress => true
-export const gameInProgress = function gameInProgress() {
+export const gameInProgress = function gameInProgress(bool = true) {
   return {
     type: GAME_IN_PROGRESS,
-    payload: true,
+    payload: bool,
   };
 };
 
 // Is Game in Progress => false
-export const gameOver = function gameOver() {
+export const gameOver = function gameOver(bool = false) {
   return {
     type: GAME_OVER,
-    payload: false,
+    payload: bool,
   };
 };
 

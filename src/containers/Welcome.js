@@ -5,7 +5,14 @@ import PropTypes from 'prop-types';
 import { Button, Input, Select, Form } from 'semantic-ui-react';
 
 import components from '../components';
-import { numPlayers, namePlayer1, namePlayer2 } from '../actions';
+import { 
+  numPlayers, 
+  namePlayer1, 
+  namePlayer2, 
+  gameInProgress, 
+  firstBoard, 
+  firstPick 
+} from '../actions';
 
 const { Status } = components;
 
@@ -36,6 +43,9 @@ class Welcome extends Component {
     const { player1, player2, board, firstMove } = this.state;
     this.props.namePlayer1(player1);
     this.props.namePlayer2(player2);
+    this.props.firstBoard(board);
+    this.props.firstPick(firstMove);
+    this.props.gameInProgress();
   };
 
   onChangePlayerName = (e, {name, value}) => {
@@ -56,7 +66,7 @@ class Welcome extends Component {
     });
   };
 
-  PlayerNames = () => {
+  GameStart = () => {
     const { player1, player2 } = this.state;
 
     return (
@@ -108,8 +118,8 @@ class Welcome extends Component {
   }
 
   render() {
-    const { chooseNumberOfPlayers, handleSubmit, PlayerNames } = this;
-    const { numberOfPlayers, numPlayers } = this.props;
+    const { chooseNumberOfPlayers, GameStart } = this;
+    const { numberOfPlayers } = this.props;
 
     return (
       <div>
@@ -137,7 +147,7 @@ class Welcome extends Component {
             null
         }
         {
-          numberOfPlayers !== -1 ? <PlayerNames /> : null
+          numberOfPlayers !== -1 ? <GameStart /> : null
         }
       </div>
     );
@@ -150,12 +160,19 @@ const mapStateToProps = (state, ownProps) => ({
 
 Welcome.propTypes = {
   numberOfPlayers: PropTypes.number.isRequired,
-  numPlayers: PropTypes.func.isRequired,
+  namePlayer1: PropTypes.func.isRequired,
+  namePlayer2: PropTypes.func.isRequired,
+  gameInProgress: PropTypes.func.isRequired,
+  firstBoard: PropTypes.func.isRequired,
+  firstPick: PropTypes.func.isRequired,
 };
 
 
 export default connect(mapStateToProps, {
   numPlayers,
   namePlayer1,
-  namePlayer2
+  namePlayer2,
+  gameInProgress,
+  firstBoard,
+  firstPick
 })(Welcome);
