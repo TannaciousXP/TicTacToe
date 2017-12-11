@@ -1,14 +1,33 @@
 export const NUM_PLAYERS = 'NUM_PLAYERS';
 export const PLAYER1_NAME = 'PLAYER1';
 export const PLAYER2_NAME = 'PLAYER2';
+export const FIRST_TURN = 'FIRST_TURN';
+export const NEXT_TURN = 'NEXT_TURN';
 
 // Have no functions
 export const WINNER = 'WINNER';
-export const FIRST_TURN = 'FIRST_TURN';
-export const NEXT_TURN = 'NEXT_TURN';
 export const BOARD_SIZE = 'BOARD_SIZE';
+export const NEW_BOARD = 'NEW_BOARD';
 export const GAME_IN_PROGRESS = 'GAME_IN_PROGRESS';
 export const TURN_COUNT = 'TURN_COUNT';
+
+// Initial Board
+export const firstBoard = function firstBoard(boardSize) {
+  const intialBoard = Array(boardSize === '' ? 9 : JSON.parse(boardSize) * JSON.parse(boardSize));
+
+  return {
+    type: BOARD_SIZE,
+    payload: intialBoard,
+  };
+};
+
+// New Board
+export const newBoard = function newBoard(newBoard) {
+  return {
+    type: NEW_BOARD,
+    payload: newBoard,
+  };
+};
 
 
 // Get First pick

@@ -5,6 +5,7 @@ import numPlayers from './reducer_numPlayers';
 import player1 from './reducer_player1Name';
 import player2 from './reducer_player2Name';
 import playerTurn from './reducer_currTurn';
+import boardPieces from './reducer_boardSize';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   player1Name: player1,
   player2Name: player2,
   currTurn: playerTurn,
+  board: boardPieces,
 });
 
 const store = createStore(
