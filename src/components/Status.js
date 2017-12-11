@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Status = ({ text }) => (
-  <h3 className="status">
+  <h2 className="status">
     {text}
-  </h3>
+  </h2>
 );
 
 Status.propTypes = {

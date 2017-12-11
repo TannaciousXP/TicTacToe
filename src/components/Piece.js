@@ -24,7 +24,7 @@ class Piece extends Component {
 
   render() {
     // TODO: pass in props
-    const { mark } = this.props;
+    const { move } = this.props;
     let hovered;
     if (this.state.hovered) {
       hovered = 'rgba(195, 195, 195, 0.6)';
@@ -38,14 +38,14 @@ class Piece extends Component {
         onMouseOver={this.hoverActive}
         onMouseLeave={this.hoverInactive}
       >
-        {mark + 'hi'}
+        {move}
       </div>
     );
   }
 }
 
 Piece.propTypes = {
-  mark: PropTypes.string.isRequired,
+  move: PropTypes.string.isRequired,
 };
 
 export default Piece;

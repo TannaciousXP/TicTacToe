@@ -20,9 +20,7 @@ class GameInProgress extends Component {
       player1Name, player2Name, currTurn, board,
     } = this.props;
     // { console.log(board) ;}
-    const boardPieces = board.map((piece, i) => <Piece key={i} mark={piece} />);
-
-    { console.log(boardPieces); }
+    const boardPieces = board.map((piece, i) => <Piece key={i} move={piece} />);
 
     return (
       <div className="board wrapper">

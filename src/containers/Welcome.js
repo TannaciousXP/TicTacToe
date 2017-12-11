@@ -41,11 +41,30 @@ class Welcome extends Component {
   handleSubmit = () => {
     console.log(this.state);
     const { player1, player2, board, firstMove } = this.state;
-    this.props.namePlayer1(player1);
-    this.props.namePlayer2(player2);
-    this.props.firstBoard(board);
-    this.props.firstPick(firstMove);
-    this.props.gameInProgress();
+    const { 
+      numberOfPlayers, 
+      namePlayer1, 
+      namePlayer2, 
+      firstBoard,
+      firstPick,
+      gameInProgress, 
+    } = this.props;
+    if (numberOfPlayers === 2 && player2 === '') {
+      namePlayer2('Player 2');
+    }
+
+    if (numberOfPlayers === 2 && player2 !== '') {
+      namePlayer2(player2);
+    }
+
+    if (numberOfPlayers === 1) {
+      namePlayer2('Computer');
+    }
+    
+    namePlayer1(player1);
+    firstBoard(board);
+    firstPick(firstMove);
+    gameInProgress();
   };
 
   onChangePlayerName = (e, {name, value}) => {
