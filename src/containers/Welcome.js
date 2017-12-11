@@ -24,14 +24,14 @@ class Welcome extends Component {
       board: '',
     }
   }
-  
+
   chooseNumberOfPlayers = (e) => {
     this.props.numPlayers(e.target.value);
   };
 
 
-  handleSubmit = (e) => {
-    console.log(e.target);
+  handleSubmit = () => {
+    console.log(this.state);
   };
 
   onChangePlayerName = (e, {name, value}) => {
@@ -41,7 +41,6 @@ class Welcome extends Component {
   };
 
   onChangeBoard = (e, { value }) => {
-    console.log(value);
     this.setState({
       board: value,
     });
