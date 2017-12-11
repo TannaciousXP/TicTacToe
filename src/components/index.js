@@ -6,5 +6,4 @@ export default {
   Board,
   Status,
   Piece,
-}
-;
+};
