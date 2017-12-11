@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, Input, Select, Form } from 'semantic-ui-react';
 
 import components from '../components';
-import { numPlayers, namePlayer1 } from '../actions';
+import { numPlayers, namePlayer1, namePlayer2 } from '../actions';
 
 const { Status } = components;
 
@@ -35,6 +35,7 @@ class Welcome extends Component {
     console.log(this.state);
     const { player1, player2, board, firstMove } = this.state;
     this.props.namePlayer1(player1);
+    this.props.namePlayer2(player2);
   };
 
   onChangePlayerName = (e, {name, value}) => {
@@ -156,4 +157,5 @@ Welcome.propTypes = {
 export default connect(mapStateToProps, {
   numPlayers,
   namePlayer1,
+  namePlayer2
 })(Welcome);
