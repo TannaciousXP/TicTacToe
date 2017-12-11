@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   player2Name: player2,
   currTurn: playerTurn,
   board: boardPieces,
-  turnCount: count,
+  turnCountNum: count,
   isGameInProgress: gameProgress,
 });
 

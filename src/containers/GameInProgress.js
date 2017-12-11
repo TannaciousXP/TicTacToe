@@ -2,26 +2,51 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import components from '../components';
-// TODO: import actions
+import {
+  turnCount,
+  gameOver,
+  gameInProgress,
+  newBoard,
+  nextTurn,
+} from '../actions';
 
 const { Board, Status, Piece } = components;
 
 class GameInProgress extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hold: '',
-    };
     this.handleClickSlot = this.handleClickSlot.bind(this);
   }
 
+  componentWillMount() {
+    const { player1Name, player2Name, currTurn } = this.props;
+
+    const inputs = [currTurn];
+    inputs.push(currTurn === 'X' ? 'O' : 'X');
+
+    const messageObj = {};
+    messageObj[inputs[0]] = `${player1Name} - ${inputs[0]} : Pick an empty slot`;
+    messageObj[inputs[1]] = `${player2Name} - ${inputs[1]} : Pick an empty slot`;
+
+    this.setState({
+      message: messageObj,
+    });
+  }
+
+  handleMessage(currentTurn) {
+    const { message } = this.state;
+    return message[currentTurn];
+  }
+
   handleClickSlot(e) {
-    console.log(e.target);
+    // const {} = this.props;
+    // console.log(e.target);
+    console.log(this.state);
   }
 
   render() {
     const {
-      player1Name, player2Name, currTurn, board,
+      currTurn, board,
     } = this.props;
     // { console.log(board) ;}
     const boardPieces = board.map((piece, i) => (<Piece
@@ -33,7 +58,7 @@ class GameInProgress extends Component {
 
     return (
       <div className="board wrapper">
-        <Status text={`${player1Name} ${currTurn}: pick a slot`} />
+        <Status text={this.handleMessage(currTurn)} />
         <Board pieces={boardPieces} width={`${(Math.sqrt(board.length) * 100) / 16}rem`} />
       </div>
     );
@@ -45,7 +70,7 @@ const mapStateToProps = (state, ownProps) => ({
   player2Name: state.player2Name,
   currTurn: state.currTurn,
   board: state.board,
-  turnCount: state.turnCount,
+  turnCountNum: state.turnCountNum,
   isGameInProgress: state.isGameInProgress,
 });
 
@@ -54,10 +79,19 @@ GameInProgress.propTypes = {
   player2Name: PropTypes.string.isRequired,
   currTurn: PropTypes.string.isRequired,
   board: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-  turnCount: PropTypes.number.isRequired,
+  turnCountNum: PropTypes.number.isRequired,
   isGameInProgress: PropTypes.bool.isRequired,
-
-
+  turnCount: PropTypes.func.isRequired,
+  gameOver: PropTypes.func.isRequired,
+  gameInProgress: PropTypes.func.isRequired,
+  newBoard: PropTypes.func.isRequired,
+  nextTurn: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, {})(GameInProgress);
+export default connect(mapStateToProps, {
+  turnCount,
+  gameOver,
+  gameInProgress,
+  newBoard,
+  nextTurn,
+})(GameInProgress);
