@@ -5,6 +5,8 @@ export const FIRST_TURN = 'FIRST_TURN';
 export const NEXT_TURN = 'NEXT_TURN';
 export const BOARD_SIZE = 'BOARD_SIZE';
 export const NEW_BOARD = 'NEW_BOARD';
+export const START_GAME = 'START_GAME';
+export const END_GAME = 'END_GAME';
 export const GAME_IN_PROGRESS = 'GAME_IN_PROGRESS';
 export const GAME_OVER = 'GAME_OVER';
 export const TURN_COUNT = 'TURN_COUNT';
@@ -121,20 +123,37 @@ export const turnCount = function turnCount(count) {
   };
 };
 
+// StartGame
+export const startGame = function startGame() {
+  return {
+    type: START_GAME,
+    payload: true,
+  };
+};
+
+// END GAME
+export const endGame = function endGame() {
+  return {
+    type: END_GAME,
+    payload: false,
+  };
+};
+
+
 // Is Game in Progress => true
-export const gameInProgress = function gameInProgress(bool = true) {
+export const gameInProgress = function gameInProgress() {
   winner = null;
   return {
     type: GAME_IN_PROGRESS,
-    payload: bool,
+    payload: true,
   };
 };
 
 // Is Game in Progress => false
-export const gameOver = function gameOver(bool = false) {
+export const gameOver = function gameOver() {
   return {
     type: GAME_OVER,
-    payload: bool,
+    payload: false,
   };
 };
 
@@ -168,6 +187,7 @@ export const firstPick = function firstPick(pick) {
     payload: pick === '' ? 'X' : pick,
   };
 };
+
 
 // Get the next nextTurn
 export const nextTurn = function nextTurn(currTurn) {

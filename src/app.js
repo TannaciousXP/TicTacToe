@@ -6,15 +6,14 @@ import containers from './containers';
 
 import './styles.css';
 
-// TODO: Add game over
-const { Welcome, GameInProgress } = containers;
+const { Welcome, GameInProgress, GameOver } = containers;
 
 
-const App = ({ isGameInProgress, numberOfPlayers }) => (
+const App = ({ isGameInProgress, isGameOn }) => (
 
   <div className="Main">
-    { // TODO: add gameover
-      numberOfPlayers === -1 || !isGameInProgress ? <Welcome /> : isGameInProgress ? <GameInProgress /> : null
+    {
+      !isGameOn ? <Welcome /> : isGameInProgress ? <GameInProgress /> : <GameOver />
     }
   </div>
 
@@ -23,11 +22,13 @@ const App = ({ isGameInProgress, numberOfPlayers }) => (
 const mapStateToProps = state => ({
   isGameInProgress: state.isGameInProgress,
   numberOfPlayers: state.numberOfPlayers,
+  isGameOn: state.isGameOn,
 });
 
 App.propTypes = {
   isGameInProgress: PropTypes.bool.isRequired,
   numberOfPlayers: PropTypes.number.isRequired,
+  isGameOn: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(App);

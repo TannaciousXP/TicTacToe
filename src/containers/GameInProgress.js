@@ -40,7 +40,6 @@ class GameInProgress extends Component {
       gameOver,
       saveWinner,
       nextTurn,
-      nextBoard,
       currTurn,
       newBoard,
     } = this.props;
@@ -108,7 +107,8 @@ class GameInProgress extends Component {
     const {
       currTurn, board,
     } = this.props;
-    // { console.log(board) ;}
+    // { console.log(board) ;}.
+    // TODO: Add color by keeping track of index
     const boardPieces = board.map((piece, i) => (<Piece
       key={i}
       value={i}

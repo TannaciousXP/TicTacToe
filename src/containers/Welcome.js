@@ -11,7 +11,8 @@ import {
   namePlayer2, 
   gameInProgress, 
   firstBoard, 
-  firstPick 
+  firstPick,
+  startGame,
 } from '../actions';
 
 const { Status } = components;
@@ -46,7 +47,8 @@ class Welcome extends Component {
       namePlayer2, 
       firstBoard,
       firstPick,
-      gameInProgress, 
+      gameInProgress,
+      startGame,
     } = this.props;
     if (numberOfPlayers === 2 && player2 === '') {
       namePlayer2('Player 2');
@@ -64,6 +66,7 @@ class Welcome extends Component {
     firstBoard(board);
     firstPick(firstMove);
     gameInProgress();
+    startGame();
   };
 
   onChangePlayerName = (e, {name, value}) => {
@@ -183,6 +186,7 @@ Welcome.propTypes = {
   gameInProgress: PropTypes.func.isRequired,
   firstBoard: PropTypes.func.isRequired,
   firstPick: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
 };
 
 
@@ -192,5 +196,6 @@ export default connect(mapStateToProps, {
   namePlayer2,
   gameInProgress,
   firstBoard,
-  firstPick
+  firstPick,
+  startGame,
 })(Welcome);
