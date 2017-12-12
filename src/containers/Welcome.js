@@ -39,7 +39,6 @@ class Welcome extends Component {
 
 
   handleSubmit = () => {
-    console.log(this.state);
     const { player1, player2, board, firstMove } = this.state;
     const { 
       numberOfPlayers, 

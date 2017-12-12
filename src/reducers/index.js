@@ -8,6 +8,8 @@ import playerTurn from './reducer_currTurn';
 import boardPieces from './reducer_boardSize';
 import count from './reducer_turnCount';
 import gameProgress from './reducer_gameInProgress';
+import winnerName from './reducer_winner';
+import nextSteps from './reducer_nextSteps';
 
 const rootReducer = combineReducers({
   numberOfPlayers: numPlayers,
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   board: boardPieces,
   turnCountNum: count,
   isGameInProgress: gameProgress,
+  winner: winnerName,
+  nextSteps,
 });
 
 const store = createStore(
