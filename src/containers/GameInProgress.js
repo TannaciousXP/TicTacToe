@@ -125,14 +125,15 @@ class GameInProgress extends Component {
       currTurn, board, numberOfPlayers, turnCountNum,
     } = this.props;
 
+    const { message } = this.state;
+
     const boardPieces = board.map((piece, i) => (<Piece
       key={i}
       value={i}
       move={piece}
-      handleClick={this.handleClickSlot}
+      handleClick={numberOfPlayers === 1 && message[currTurn] === 'Computer' ? null : this.handleClickSlot}
     />));
 
-    const { message } = this.state;
 
     return (
       <div className="board wrapper">

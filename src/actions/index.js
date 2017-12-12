@@ -34,7 +34,7 @@ export const checkForWinner = function checkForWinner(board) {
         winner = null;
         break;
       }
-      if (col === 2 && winner !== null) {
+      if (col === length - 1 && winner !== null) {
         return winner;
       }
     }
@@ -54,7 +54,7 @@ export const checkForWinner = function checkForWinner(board) {
         winner = null;
         break;
       }
-      if (col === 2 && winner !== null) {
+      if (col === length - 1 && winner !== null) {
         return winner;
       }
     }
