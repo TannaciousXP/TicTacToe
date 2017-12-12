@@ -96,12 +96,13 @@ export const insertIntoSlot = function insertIntoSlot(idx, currTurn, board) {
   const boardCopy = [...board];
   boardCopy[idx] = currTurn;
   const winningPlayer = checkForWinner(boardCopy);
-
+  const nextPlayer = currTurn === 'X' ? 'O' : 'X';
   return {
     type: NEXT_STEPS,
     payload: {
       winningPlayer,
       boardCopy,
+      nextPlayer,
     },
   };
 };

@@ -42,14 +42,11 @@ class GameInProgress extends Component {
       nextTurn,
       currTurn,
       newBoard,
+      nextSteps,
+      board,
     } = this.props;
 
     const { message } = nextState;
-
-    // console.log('INSIDDEEEEEEEEEEEEEEEEEEEEEEEE COMPONENT WILL UPDATE');
-    // console.log(nextProps);
-    // console.log(nextState);
-    // return JSON.stringify(nextProps) !== JSON.stringify(this.props) ? true : null;
 
     if (nextProps.nextSteps.winningPlayer !== null) {
       saveWinner(`${message[currTurn]} - ${currTurn}: is the WINNER!`);
@@ -61,8 +58,14 @@ class GameInProgress extends Component {
       gameOver();
     }
 
-    newBoard(nextProps.nextSteps.boardCopy);
-    nextTurn(currTurn);
+    // if (JSON.stringify(board) !== JSON.stringify(nextProps.nextSteps.boardCopy)) {
+    //   newBoard(nextProps.nextSteps.boardCopy);
+    //   nextTurn(currTurn);
+    // }
+    if (currTurn !== nextProps.nextSteps.nextPlayer) {
+      newBoard(nextProps.nextSteps.boardCopy);
+      nextTurn(currTurn);
+    }
   }
 
   handleMessage(currentTurn) {
@@ -80,6 +83,22 @@ class GameInProgress extends Component {
     return boardAvailableSlots;
   }
 
+  computerMakesMove() {
+    const {
+      board, insertIntoSlot, currTurn, turnCount, turnCountNum,
+    } = this.props;
+    const timeToThink = Math.floor(Math.random() * 3000);
+
+    turnCount(turnCountNum + 1);
+
+    setTimeout(() => {
+      const avialableSlotsArr = this.availabeSlots(board);
+      const compInsert = avialableSlotsArr[Math.floor(Math.random() * avialableSlotsArr.length)];
+
+      insertIntoSlot(compInsert, currTurn, board);
+    }, timeToThink);
+  }
+
   handleClickSlot(e) {
     const {
       board,
@@ -91,10 +110,8 @@ class GameInProgress extends Component {
 
     turnCount(turnCountNum + 1);
 
-
     const availableSlotsArr = this.availabeSlots(board);
     const i = JSON.parse(e.target.getAttribute('value'));
-
     const canInsert = availableSlotsArr.indexOf(i) !== -1;
 
     if (canInsert) {
@@ -105,10 +122,9 @@ class GameInProgress extends Component {
 
   render() {
     const {
-      currTurn, board,
+      currTurn, board, numberOfPlayers, turnCountNum,
     } = this.props;
-    // { console.log(board) ;}.
-    // TODO: Add color by keeping track of index
+
     const boardPieces = board.map((piece, i) => (<Piece
       key={i}
       value={i}
@@ -116,10 +132,15 @@ class GameInProgress extends Component {
       handleClick={this.handleClickSlot}
     />));
 
+    const { message } = this.state;
+
     return (
       <div className="board wrapper">
         <Status text={this.handleMessage(currTurn)} />
         <Board pieces={boardPieces} width={`${(Math.sqrt(board.length) * 100) / 16}rem`} />
+        {
+          numberOfPlayers === 1 && turnCountNum % 2 === 1 && message[currTurn] === 'Computer' ? this.computerMakesMove() : null
+        }
       </div>
     );
   }
@@ -134,6 +155,7 @@ const mapStateToProps = state => ({
   isGameInProgress: state.isGameInProgress,
   winner: state.winner,
   nextSteps: state.nextSteps,
+  numberOfPlayers: state.numberOfPlayers,
 });
 
 GameInProgress.propTypes = {
@@ -142,6 +164,7 @@ GameInProgress.propTypes = {
   currTurn: PropTypes.string.isRequired,
   board: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   turnCountNum: PropTypes.number.isRequired,
+  numberOfPlayers: PropTypes.number.isRequired,
   turnCount: PropTypes.func.isRequired,
   gameOver: PropTypes.func.isRequired,
   newBoard: PropTypes.func.isRequired,
