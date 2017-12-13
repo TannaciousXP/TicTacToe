@@ -113,7 +113,6 @@ class GameInProgress extends Component {
     const canInsert = availableSlotsArr.indexOf(i) !== -1;
 
     if (canInsert) {
-      console.log('inside can insert');
       insertIntoSlot(i, currTurn, board);
     }
   }
