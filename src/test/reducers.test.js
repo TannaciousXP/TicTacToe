@@ -8,7 +8,21 @@ import player1Reducer from '../reducers/reducer_player1Name';
 import player2Reducer from '../reducers/reducer_player2Name';
 import turnCountReducer from '../reducers/reducer_turnCount';
 import winnerReducer from '../reducers/reducer_winner';
-import { NEW_BOARD, NEXT_TURN, gameInProgress, GAME_IN_PROGRESS, GAME_OVER, START_GAME, END_GAME, NEXT_STEPS, NUM_PLAYERS, PLAYER1_NAME, PLAYER2_NAME } from '../actions/index';
+
+import {
+  NEW_BOARD,
+  NEXT_TURN,
+  GAME_IN_PROGRESS,
+  GAME_OVER,
+  START_GAME,
+  END_GAME,
+  NEXT_STEPS,
+  NUM_PLAYERS,
+  PLAYER1_NAME,
+  PLAYER2_NAME,
+  TURN_COUNT,
+  WINNER,
+} from '../actions/index';
 
 // Board reducer
 describe('Board size reducer', () => {
@@ -156,3 +170,32 @@ describe('Player 2 reducer', () => {
   });
 });
 
+// Turn count reducer
+describe('Turn count reducer', () => {
+  it('should return the initial state', () => {
+    expect(turnCountReducer(undefined, {})).toEqual(0);
+  });
+
+  it('should return 2', () => {
+    const action = {
+      type: TURN_COUNT,
+      payload: 2,
+    };
+    expect(turnCountReducer(undefined, action)).toEqual(2);
+  });
+});
+
+// Winner reducer
+describe('Turn count reducer', () => {
+  it('should return the initial state', () => {
+    expect(winnerReducer(undefined, {})).toEqual('');
+  });
+
+  it('should return Peter', () => {
+    const action = {
+      type: WINNER,
+      payload: 'Peter',
+    };
+    expect(winnerReducer(undefined, action)).toEqual('Peter');
+  });
+});
