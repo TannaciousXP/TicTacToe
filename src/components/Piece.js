@@ -7,23 +7,23 @@ class Piece extends Component {
     this.state = {
       hovered: false,
     };
+    this.hoverActive = this.hoverActive.bind(this);
+    this.hoverInactive = this.hoverInactive.bind(this);
   }
 
-
-  hoverActive = () => {
+  hoverActive() {
     this.setState({
       hovered: true,
     });
   }
 
-  hoverInactive = () => {
+  hoverInactive() {
     this.setState({
       hovered: false,
     });
   }
 
   render() {
-    // TODO: pass in props
     const { move, handleClick, value } = this.props;
     let hovered;
     if (this.state.hovered) {
@@ -38,8 +38,7 @@ class Piece extends Component {
         style={{ background: hovered }}
         onMouseOver={this.hoverActive}
         onMouseLeave={this.hoverInactive}
-      >
-        {move}
+      >{move}
       </div>
     );
   }
@@ -47,7 +46,7 @@ class Piece extends Component {
 
 Piece.propTypes = {
   move: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   value: PropTypes.number.isRequired,
 };
 

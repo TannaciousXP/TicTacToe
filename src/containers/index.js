@@ -1,5 +1,5 @@
-import Welcome from './Welcome';
 import GameInProgress from './GameInProgress';
+import Welcome from './Welcome';
 import GameOver from './GameOver';
 
 export default {
