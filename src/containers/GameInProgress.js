@@ -42,8 +42,6 @@ class GameInProgress extends Component {
       nextTurn,
       currTurn,
       newBoard,
-      nextSteps,
-      board,
     } = this.props;
 
     const { message } = nextState;
