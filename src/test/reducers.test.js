@@ -1,7 +1,6 @@
 import boardSizeReducer from '../reducers/reducer_boardSize';
 import currTurnReducer from '../reducers/reducer_currTurn';
 import gameInProgressReducer from '../reducers/reducer_gameInProgress';
-import gameStartReducer from '../reducers/reducer_gameStart';
 import isGomeOnReducer from '../reducers/reducer_isGameOn';
 import nextStepsReducer from '../reducers/reducer_nextSteps';
 import numPlayersReducer from '../reducers/reducer_numPlayers';
@@ -9,16 +8,16 @@ import player1Reducer from '../reducers/reducer_player1Name';
 import player2Reducer from '../reducers/reducer_player2Name';
 import turnCountReducer from '../reducers/reducer_turnCount';
 import winnerReducer from '../reducers/reducer_winner';
-import { NEW_BOARD } from '../actions/index';
+import { NEW_BOARD, NEXT_TURN, gameInProgress, GAME_IN_PROGRESS, GAME_OVER, START_GAME, END_GAME, NEXT_STEPS } from '../actions/index';
 
+// Board reducer
 describe('Board size reducer', () => {
-  const intialBoard = [];
-
-  for (let i = 0; i < 9; i++) {
-    intialBoard.push('');
-  }
-
   it('should return the initial state', () => {
+    const intialBoard = [];
+
+    for (let i = 0; i < 9; i++) {
+      intialBoard.push('');
+    }
     expect(boardSizeReducer(undefined, {})).toEqual(intialBoard);
   });
 
@@ -33,3 +32,81 @@ describe('Board size reducer', () => {
   });
 });
 
+// Turn reducer
+describe('Current turn reducer', () => {
+  it('should return the initial state', () => {
+    expect(currTurnReducer(undefined, {})).toEqual('X');
+  });
+
+  it('should return new turn', () => {
+    const action = {
+      type: NEXT_TURN,
+      payload: 'O',
+    };
+    expect(currTurnReducer(undefined, action)).toEqual('O');
+  });
+});
+
+// Game Reducer
+describe('Game in progress reducer', () => {
+  it('should return the initial state', () => {
+    expect(gameInProgressReducer(undefined, {})).toEqual(false);
+  });
+
+  it('should return true', () => {
+    const action = {
+      type: GAME_IN_PROGRESS,
+      payload: true,
+    };
+    expect(gameInProgressReducer(undefined, action)).toEqual(true);
+  });
+
+  it('should return false', () => {
+    const action = {
+      type: GAME_OVER,
+      payload: false,
+    };
+    expect(gameInProgressReducer(undefined, action)).toEqual(false);
+  });
+});
+
+// GameStart
+describe('Game on reducer', () => {
+  it('should return the initial state', () => {
+    expect(isGomeOnReducer(undefined, {})).toEqual(false);
+  });
+
+  it('should return true', () => {
+    const action = {
+      type: START_GAME,
+      payload: true,
+    };
+    expect(isGomeOnReducer(undefined, action)).toEqual(true);
+  });
+
+  it('should return false', () => {
+    const action = {
+      type: END_GAME,
+      payload: false,
+    };
+    expect(isGomeOnReducer(undefined, action)).toEqual(false);
+  });
+});
+
+// nextStep reducer
+describe('Next step reducer', () => {
+  it('should return the initial state', () => {
+    expect(nextStepsReducer(undefined, {})).toEqual({});
+  });
+
+  it('should return true', () => {
+    const payload = {
+      board: ['X', 'O', 'X'],
+    };
+    const action = {
+      type: NEXT_STEPS,
+      payload,
+    };
+    expect(nextStepsReducer(undefined, action)).toEqual(payload);
+  });
+});
