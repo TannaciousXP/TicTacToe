@@ -8,7 +8,7 @@ import player1Reducer from '../reducers/reducer_player1Name';
 import player2Reducer from '../reducers/reducer_player2Name';
 import turnCountReducer from '../reducers/reducer_turnCount';
 import winnerReducer from '../reducers/reducer_winner';
-import { NEW_BOARD, NEXT_TURN, gameInProgress, GAME_IN_PROGRESS, GAME_OVER, START_GAME, END_GAME, NEXT_STEPS } from '../actions/index';
+import { NEW_BOARD, NEXT_TURN, gameInProgress, GAME_IN_PROGRESS, GAME_OVER, START_GAME, END_GAME, NEXT_STEPS, NUM_PLAYERS, PLAYER1_NAME, PLAYER2_NAME } from '../actions/index';
 
 // Board reducer
 describe('Board size reducer', () => {
@@ -110,3 +110,49 @@ describe('Next step reducer', () => {
     expect(nextStepsReducer(undefined, action)).toEqual(payload);
   });
 });
+
+// number players reducer
+describe('Number of players reducer', () => {
+  it('should return the initial state', () => {
+    expect(numPlayersReducer(undefined, {})).toEqual(-1);
+  });
+
+  it('should return 2', () => {
+    const action = {
+      type: NUM_PLAYERS,
+      payload: 2,
+    };
+    expect(numPlayersReducer(undefined, action)).toEqual(2);
+  });
+});
+
+// Player 1 reducer
+describe('Player 1 reducer', () => {
+  it('should return the initial state', () => {
+    expect(player1Reducer(undefined, {})).toEqual('Player 1');
+  });
+
+  it('should return Peter', () => {
+    const action = {
+      type: PLAYER1_NAME,
+      payload: 'Peter',
+    };
+    expect(player1Reducer(undefined, action)).toEqual('Peter');
+  });
+});
+
+// Player 2 reducer
+describe('Player 2 reducer', () => {
+  it('should return the initial state', () => {
+    expect(player2Reducer(undefined, {})).toEqual('Computer');
+  });
+
+  it('should return Peter', () => {
+    const action = {
+      type: PLAYER2_NAME,
+      payload: 'Peter',
+    };
+    expect(player2Reducer(undefined, action)).toEqual('Peter');
+  });
+});
+
