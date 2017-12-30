@@ -1,4 +1,4 @@
-# TicTaoeToe
+# TicTacToe
 
 Build a tic tac toe app that can have 1 or 2 players.
 
